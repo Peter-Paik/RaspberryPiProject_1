@@ -22,8 +22,23 @@ public class Client
             {
                 System.out.println("go time");
                 AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+
+                System.out.println(audioInput.getFormat());       //prob make a buffer instead of using avaiable
+                byte[] bytes = new byte[audioInput.available()];//dunno if avaiable is whole song or part
+                audioInput.read(bytes);
+                System.out.println(bytes.length);
+                System.out.println(bytes[10000]);
+
+
+
+
+
+
+
+
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInput);
+
                 clip.start();
                 System.out.println("Press q to stop");
                 String end = "n";//figure out bettter method later
@@ -31,7 +46,8 @@ public class Client
                     end = in.nextLine();
                 }
                 System.out.println("Stopping...");
-
+                
+                
                 clip.stop();
                 clip.close();
 
